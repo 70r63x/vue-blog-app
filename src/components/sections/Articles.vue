@@ -1,15 +1,24 @@
 <template>
-    <div id="articles">
-        <article class="article-item" id="article-template">
+    <div id="articles" v-if="articlesData">
+        <div class="loading" v-if="!articlesData">
+            Cargando...
+        </div>
+
+        <div class="loading" v-if="articles && articles.length == 0">
+            No hay articulos disponibles con la busqueda
+        </div>
+        <article class="article-item" id="article-template" v-for="article in articlesData" :key="article.title">
             <div class="image-wrap">
-                <img src="https://unhabitatmejor.leroymerlin.es/sites/default/files/styles/header_category/public/2018-10/4%20paisaje%20macedonia.jpg?itok=AELknmF8" alt="Paisaje" />
+                <img :src="servidor +'/get-image/'+ article.image" :alt="article.title" v-if="article.image"/>
+                <img :src="servidor +'/get-image/no-image.jpg'" :alt="article.title" v-else/>
             </div>
 
-            <h2>Articulo de prueba</h2>
+            <h2>{{article.title}}</h2>
             <span class="date">
-                Hace 5 minutos
+                {{article.date | moment("from", "now")}}
             </span>
-            <a href="#">Leer más</a>
+            <a href="#"></a>
+            <router-link :to="{name: 'article', params: {id: article._id}}">Leer más</router-link>
 
             <div class="clearfix"></div>
         </article>
@@ -20,10 +29,20 @@
 </template>
 
 <script>
+import {environment} from "../../environments/environments";
+
 export default {
     name: 'ArticlesComponent',
     setup() {
         
     },
+    props: [
+        'articlesData'
+    ],
+    data(){
+        return{
+            servidor: environment.server
+        }
+    }
 }
 </script>

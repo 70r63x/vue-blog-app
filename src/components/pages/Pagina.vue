@@ -1,13 +1,13 @@
 <template>
     <span>
-        <SliderCompoenent />
+        <SliderCompoenent title="Pagina" size="slider-small"/>
 
         <div class="center">
             <section id="content">
                 
                 <h2 class="subheader">Pagina de prueba</h2>
                 <input type="text" v-model="nombre">
-                {{nombre}}
+                {{nombre | mayusculas}}
 
                 <input type="number" v-model="edad">
                 {{edad}}
@@ -16,7 +16,7 @@
                 <p v-else>Hola menor</p>
 
                 <ul>
-                    <li v-for="pelicula in pelis" :key="pelicula">{{pelicula}}</li>
+                    <li v-for="pelicula in pelis" v-bind:key="pelicula">{{pelicula}}</li>
                 </ul>
             </section>
         </div>
@@ -33,6 +33,11 @@ export default {
     },
     setup(){
 
+    },
+    filters:{
+        mayusculas (value){
+            return value.toUpperCase();
+        }
     },
     data() {
         return{

@@ -1,13 +1,19 @@
 <template>
-    <div id="slider" class="slider-big">
-        <h1>Bienvenido al Blog practico con Vue y NodeJS (Express)</h1>
-        <router-link to="/blog" class="btn-white">Ir al blog</router-link>
+    <div id="slider" :class="{
+        'slider-big': size === 'slider-big',
+        'slider-small': size === 'slider-small'
+    }">
+        <h1>{{title}}</h1>
+        <router-link to="/blog" class="btn-white" v-if="size === 'slider-big'">Ir al blog</router-link>
     </div>
 </template>
 
 <script>
 export default {
     name: 'SliderComponent',
+    props: [
+        'title', 'size'
+    ],
     setup() {
         
     },
