@@ -1,4 +1,8 @@
-# vue-blog
+# VueBlog
+
+Frontend para Blog con Vue
+
+Backend asociado para el proyecto ---> [BackEnd Blog](https://github.com/70r63x/backend-blog-app)
 
 ## Project setup
 ```
